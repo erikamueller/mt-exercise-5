@@ -11,11 +11,11 @@ data and train & evaluate models.
 
     `pip install virtualenv`
 
-# Steps
+## Steps for setting up and data download
 
 Clone this repository in the desired place:
 
-    git clone https://github.com/emmavdbold/mt-exercise-5
+    git clone https://github.com/erikamueller/mt-exercise-5
 
 Create a new virtualenv that uses Python 3. Please make sure to run this command outside of any virtual Python environment:
 
@@ -33,12 +33,95 @@ Download data:
 
 The data is only minimally preprocessed, so you may want to tokenize it and apply any further preprocessing steps.
 
-Train a model:
+#MT Exercise 5: Experiments with Byte Pair Encoding
 
-    ./scripts/train.sh
+## Steps for preprocessing data
+
+Sub-sample parallel training data to 100k sentence pairs to make training manageable on small machines and tokenize
+train, dev, test data
+
+    ./scripts/preprocess.sh
+
+Remark: The sub-sample script takes 30 to 40 minutes to run.
+
+## Steps for training of word-level model 
+
+Train word-level JoeyNMT model a) with vocabulary size set to 2000:
+
+    ./scripts/train_word.sh
 
 The training process can be interrupted at any time, and the best checkpoint will always be saved.
 
-Evaluate a trained model with
+Evaluate word-level JoeyNMT model a) with
 
-    ./scripts/evaluate.sh
+    ./scripts/evaluate_word.sh
+
+## BPE preprocessing and training of bpe-level model b) with vocabulary size set to 2000
+
+### Steps for BPE preprocessing 
+
+Learn BPE model:
+
+    ./scripts/bpe_prep.sh
+
+Apply BPE model:
+
+    ./scripts/bpe_apply.sh
+
+Build single vocabulary file:
+
+    ./scripts/bpe_build_joined_vocab.sh
+
+### Steps for training
+
+Train bpe-level JoeyNMT model b) with vocabulary size set to 2000:
+
+    ./scripts/train_bpe.sh
+
+The training process can be interrupted at any time, and the best checkpoint will always be saved.
+
+Evaluate bpe-level JoeyNMT model b) with
+
+    ./scripts/evaluate_bpe.sh
+
+## BPE preprocessing and training of bpe-level model c) with vocabulary size set to 10000
+
+### Steps for BPE preprocessing 
+
+Learn BPE model:
+
+    ./scripts/bpe_prep_10k.sh
+
+Apply BPE model:
+
+    ./scripts/bpe_apply_10k.sh
+
+Build single vocabulary file:
+
+    ./scripts/bpe_build_joined_vocab_10k.sh
+
+### Steps for training
+
+Train bpe-level JoeyNMT model c) with vocabulary size set to 10000:
+
+    ./scripts/train_bpe_10k.sh
+
+The training process can be interrupted at any time, and the best checkpoint will always be saved.
+
+Evaluate bpe-level JoeyNMT model c) with
+
+    ./scripts/evaluate_bpe_10k.sh
+
+#MT Exercise 5: Impact of beam size on translation quality
+
+Change the beam size parameter in the config file of the best model ten times and evaluate:
+
+Best model: ??
+
+Configuration file:
+
+    ./configs/transformer_bpe_10k_config.sh
+
+Evaluation:
+
+    ./scripts/evaluate_bpe_10k.sh
