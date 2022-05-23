@@ -114,9 +114,14 @@ Evaluate bpe-level JoeyNMT model c) with
 
 #MT Exercise 5: Impact of beam size on translation quality
 
-Change the beam size parameter in the config file of the best model ten times and evaluate:
+Change the beam size parameter in the config file of the best model and evaluate ten times according the following list:
 
-Best model: ??
+Beam size list: [1, 2, 3, 4, 5, 6, 8, 10, 12, 15]
+
+Best model: bpe-level model c) with vocabulary size set to 10000. Evaluation run with all the beam sizes results in the
+following list of BLEU score.
+
+BLEU list: [19.8, 20.6, 20.9, 21.0, 20.9, 21.0, 21.0, 21.0, 20.8, 20.4]
 
 Configuration file:
 
@@ -124,4 +129,8 @@ Configuration file:
 
 Evaluation:
 
-    ./scripts/evaluate_bpe_10k.sh
+    ./scripts/evaluate_bpe_10k_beam_size.sh
+
+Jupyter notebook to produce the graph:
+
+    ./scripts/graph.ipynb

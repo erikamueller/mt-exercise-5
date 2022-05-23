@@ -24,11 +24,12 @@ device=0
 SECONDS=0
 
 model_name=transformer_bpe_10k_config
+beam_size=_12
 
 echo "###############################################################################"
 echo "model_name $model_name"
 
-translations_sub=$translations/$model_name/
+translations_sub=$translations/$model_name$beam_size/
 
 mkdir -p $translations_sub
 
