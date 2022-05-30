@@ -1,4 +1,4 @@
-name: "models/transformer_bpe_config"
+name: "transformer_bpe_config"
 
 data:
     src: "en"
